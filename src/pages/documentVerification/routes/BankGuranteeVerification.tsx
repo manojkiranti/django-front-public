@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import dayjs from 'dayjs';
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -17,13 +18,17 @@ import { documentVerificationMenu } from "../constant";
 import { BRANCH_LIST } from "@/constant/options";
 import { currencies } from "@/utils/currenciesUtils";
 import { Link } from "react-router-dom";
+import useOtpModal from "@/hooks/useOtpModal";
 
 const siteKey = import.meta.env.VITE_CAPTCHA_SITE_KEY;
 
 const BankGuranteeVerification = () => {
+    const navigate = useNavigate();
     const [messageApi, contextHolder] = message.useMessage();
     const [captchaValue, setCaptchaValue] = useState<string | null>(null);
-    const [postCustomerRequest, {isLoading}] = useCustomerServiceRequestMutation();
+    const [serviceId, setServiceId] = useState<string | null>(null);
+    const [postCustomerRequest, { isLoading }] =
+    useCustomerServiceRequestMutation();
       
   const {
     control,
@@ -31,7 +36,7 @@ const BankGuranteeVerification = () => {
     formState: { errors },
   } = useForm<BankGuranteeVerificationFormType>({
     defaultValues: {
-        
+        accountNumber:"123456789"
     },
     resolver: yupResolver(bankGuraneeVerificationSchema),
   });
@@ -45,9 +50,22 @@ const BankGuranteeVerification = () => {
         messageApi.error("Please complete the reCAPTCHA to submit the form.")
         return;
       }
-    
+      postCustomerRequest({action:"bank_gurantee_verification", data}).unwrap()
+      .then(response => {
+        setServiceId(response.data.pending_request_id)
+        showOtpModal();
+      }).catch(err => {
+        displayError(err);
+      })
+  };
+  const handleServiceSubmission = () => {
+    navigate('/')
   };
 
+  const { showModal: showOtpModal, OtpModalComponent } = useOtpModal({
+    serviceId: serviceId,
+    handleServiceSubmission: handleServiceSubmission
+  });
   return (
     <>
     {contextHolder}
@@ -130,6 +148,7 @@ const BankGuranteeVerification = () => {
         </Col>
       </Row>
     </Container>
+    {OtpModalComponent}
     </>
   );
 };

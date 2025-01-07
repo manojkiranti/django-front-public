@@ -1,6 +1,8 @@
 import * as yup from 'yup';
 
 export const bankGuraneeVerificationSchema = yup.object().shape({
+  accountNumber: yup
+    .string(),
   referenceNumber: yup
     .string()
     .required('Reference number is required.'),

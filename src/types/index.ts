@@ -72,6 +72,7 @@ export type UserProfile = {
 export type ActionType = "debit_card_register" | "credit_card_register" | "repin_debit_card" | "debit_card_block" 
 | "debit_card_unblock" | "mobile_banking_register" | "mobile_banking_reset_pin" | "mobile_banking_block" | "mobile_banking_unblock"
 | "fixed_deposit" | "dispute_claim" | "block_account" | "cheque_request" | "cheque_stop_payment" | "balance_certificate" | "locker_request"
+| "cash_deposit" | "cheque_deposit" | "home_loan" | "gold_loan" | "loan_against_shares" | "credit_card_loan" | "bank_gurantee_verification"
 export interface CustomerRequestPayload<T> {
   action: ActionType;
   data: T;

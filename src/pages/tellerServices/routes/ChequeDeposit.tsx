@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Container } from "@/components/Elements";
@@ -15,6 +16,7 @@ import { tellerMenuItems } from "../constant";
 import { chequeDepositSchema } from "../schema";
 import {  ChequeDepositType } from "../types";
 import { Link } from "react-router-dom";
+import useOtpModal from "@/hooks/useOtpModal";
 
 
 
@@ -25,9 +27,12 @@ const siteKey = import.meta.env.VITE_CAPTCHA_SITE_KEY;
 
 
 const ChequeDeposit = () => {
+    const navigate = useNavigate();
     const [messageApi, contextHolder] = message.useMessage();
     const [captchaValue, setCaptchaValue] = useState<string | null>(null);
-    const [postCustomerRequest, {isLoading}] = useCustomerServiceRequestMutation();
+    const [serviceId, setServiceId] = useState<string | null>(null);
+    const [postCustomerRequest, { isLoading }] =
+    useCustomerServiceRequestMutation();
       
   const {
     control,
@@ -47,9 +52,23 @@ const ChequeDeposit = () => {
         messageApi.error("Please complete the reCAPTCHA to submit the form.")
         return;
       }
-     
+      data.accountNumber = data.depositAccountNumber;
+      postCustomerRequest({action:"cheque_deposit", data}).unwrap()
+      .then(response => {
+        setServiceId(response.data.pending_request_id)
+        showOtpModal();
+      }).catch(err => {
+        displayError(err);
+      })
+  };
+  const handleServiceSubmission = () => {
+    navigate('/')
   };
 
+  const { showModal: showOtpModal, OtpModalComponent } = useOtpModal({
+    serviceId: serviceId,
+    handleServiceSubmission: handleServiceSubmission
+  });
   return (
     <>
     {contextHolder}
@@ -93,9 +112,9 @@ const ChequeDeposit = () => {
                   <Col xs={24} md={8}>
                     <InputField
                       label="Deposit Account Number"
-                      name="depositAccountName"
+                      name="depositAccountNumber"
                       control={control}
-                      error={errors.depositAccountName?.message ?? ""}
+                      error={errors.depositAccountNumber?.message ?? ""}
                       placeholder="Enter deposit account number"
                       size="large"
                       required={true}
@@ -165,6 +184,7 @@ const ChequeDeposit = () => {
         </Col>
       </Row>
     </Container>
+    {OtpModalComponent}
     </>
   );
 };

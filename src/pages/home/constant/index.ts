@@ -157,7 +157,7 @@ export const loanServices = [
     {
         title: "Credit Card",
         icon: faCreditCard,
-        link: 'loan/credit-card',
+        link: 'loan/credit-card-loan',
         name: 'creditCardLoan'
     }
 ]

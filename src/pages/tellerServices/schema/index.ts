@@ -1,6 +1,7 @@
 import * as yup from 'yup';
 
 export const cashDepositSchema = yup.object().shape({
+  accountNumber:yup.string(),
   depositAccountNumber: yup
     .string()
     .required('Deposit account number is required.'),
@@ -11,6 +12,7 @@ export const cashDepositSchema = yup.object().shape({
 
 
 export const chequeDepositSchema = yup.object().shape({
+  accountNumber:yup.string(),
     depositAccountNumber: yup
       .string()
       .required('Deposit account number is required.'),

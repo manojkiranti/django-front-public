@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -14,20 +15,26 @@ import { displayError } from "@/utils/displayMessageUtils";
 import { LoanFormType } from "../types";
 import { loanSchema } from "../schema";
 import { loanMenu } from "../constant";
+import useOtpModal from "@/hooks/useOtpModal";
+import { replaceHyphenWithUnderscore } from "@/utils/commonUtils";
+import { error } from "console";
 const siteKey = import.meta.env.VITE_CAPTCHA_SITE_KEY;
 
 const PersonalLoan = () => {
+    const navigate = useNavigate();
     const { loantype } = useParams<{ loantype: string }>();
     const [messageApi, contextHolder] = message.useMessage();
     const [captchaValue, setCaptchaValue] = useState<string | null>(null);
-    const [postCustomerRequest, {isLoading}] = useCustomerServiceRequestMutation();
+    const [serviceId, setServiceId] = useState<string | null>(null);
+    const [postCustomerRequest, { isLoading }] =
+    useCustomerServiceRequestMutation();
     
     const loanTitles: Record<string, string> = {
         "home-loan": "Home Loan",
         "car-loan": "Car Loan",
         "gold-loan": "Gold Loan",
         "loan-against-share": "Loan Against Share",
-        "credit-card": "Credit Card"
+        "credit-card-loan": "Credit Card"
     };
     
   const {
@@ -39,7 +46,7 @@ const PersonalLoan = () => {
     defaultValues: {},
     resolver: yupResolver(loanSchema),
   });
-
+  console.log(errors)
   useEffect(() => {
     if(loantype) {
         setValue("loanType", loantype)
@@ -55,9 +62,22 @@ const PersonalLoan = () => {
         messageApi.error("Please complete the reCAPTCHA to submit the form.")
         return;
       }
-     
+      postCustomerRequest({ action: replaceHyphenWithUnderscore(data.loanType) as any, data}).unwrap()
+      .then(response => {
+        setServiceId(response.data.pending_request_id)
+        showOtpModal();
+      }).catch(err => {
+        displayError(err);
+      })
+  };
+  const handleServiceSubmission = () => {
+    navigate('/')
   };
 
+  const { showModal: showOtpModal, OtpModalComponent } = useOtpModal({
+    serviceId: serviceId,
+    handleServiceSubmission: handleServiceSubmission
+  });
   return (
     <>
     {contextHolder}
@@ -149,11 +169,12 @@ const PersonalLoan = () => {
                             {label:"Home Loan", value:"home-loan"},
                             {label:"Gold Loan", value:"gold-loan"},
                             {label:"Loan Against Share", value:"loan-against-share"},
-                            {label:"Credit Card", value:"credit-card"}
+                            {label:"Credit Card", value:"credit-card-loan"}
                         ]}
                         name="loanType"
                         control={control}
                         label="Loan Type"
+                        disabled={true}
                         size="large"
                         placeholder="Select Loan Type"
                         error={errors.loanType?.message ?? ''}
@@ -180,7 +201,7 @@ const PersonalLoan = () => {
                       name="paybackPeriod"            
                       control={control}
                       error={errors.paybackPeriod?.message ?? ""}
-                      placeholder="Loan Amount"
+                      placeholder="Payback Period"
                       type="number"
                       size="large"
                       required={true}
@@ -205,6 +226,7 @@ const PersonalLoan = () => {
         </Col>
       </Row>
     </Container>
+    {OtpModalComponent}
     </>
   );
 };
