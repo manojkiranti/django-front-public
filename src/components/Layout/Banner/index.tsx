@@ -11,12 +11,12 @@ const options = [
 const Banner = () => {
     return (
         <>
-            <div className="banner" style={{padding:"1rem 0 10rem"}}>
+            <div className="banner" style={{padding:"0.5rem 0 9rem"}}>
                 <Container>
                     <Row>
                         <Col xs={24} md={24}>
                             <div style={{maxWidth:"1080px", margin:"0 auto", textAlign:"center"}}>
-                                <Typography.Title level={2} style={{color:"#fff"}}>One-Stop Hub for Smarter Banking!</Typography.Title>
+                                <Typography.Title level={2} style={{color:"#fff", marginBottom:"0.5rem"}}>One-Stop Hub for Smarter Banking!</Typography.Title>
                                 <Paragraph style={{color:"#fff", marginBottom:"2rem"}}>Bank Genie: Seamless Digital Banking for All Your Financial Needs.</Paragraph>
                                 <div className="search-box-wrapper">
                                     <AutoComplete

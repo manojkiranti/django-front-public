@@ -32,13 +32,13 @@ const NavBar = () => {
                 {MENU_ITEMS.map((menu) => {
                   return (
                     
-                        <NavLink className={({ isActive }) => (isActive ? 'navbar-item active' : 'navbar-item')}  key={menu.key}  to={menu.link as string} style={{ display: 'block', width: '100%' }}>
+                        <NavLink className={({ isActive }) => (isActive ? 'navbar-item active' : 'navbar-item')}  key={menu.key}  to={menu.link as string} >
                             <div>
                               <div className="navbar-icon">
                                   <FontAwesomeIcon icon={iconMapper[menu.icon as keyof typeof iconMapper]} />
                               </div>
 
-                              <Typography.Title style={{ fontSize: "14px" }}>
+                              <Typography.Title style={{ fontSize: "14px", margin:0 }}>
                                   {menu.label}
                               </Typography.Title>
                             </div>
