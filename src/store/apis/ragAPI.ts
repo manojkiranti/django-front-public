@@ -1,4 +1,22 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { Message } from '@/components/Layout/Assistant/AIAssistant';
+export type RAGContext = {
+  id: string;
+  metadata: {
+    source: string;
+  };
+  page_content: string;
+  type: string;
+};
+export type RAGResponse = {
+  result: {
+    answer: string;
+    chat_history: any;
+    context: RAGContext[];
+    input: string;
+  };
+  follow_up_questions: string;
+};
 
 export const ragAPI = createApi({
   reducerPath: "ragAPI",
@@ -16,7 +34,7 @@ export const ragAPI = createApi({
       },
   }),
   endpoints: (builder) => ({
-    queryRAG: builder.mutation<{answer:any, sources:any}, { query: string }>({
+    queryRAG: builder.mutation<RAGResponse, { query: string; chat_history: Message[] }>({
       query: (body) => {
         return {
           url: "/api/query",

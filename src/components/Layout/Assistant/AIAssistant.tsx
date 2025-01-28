@@ -9,9 +9,10 @@ import {
 import { Button, Tooltip, Typography, theme, Input, List, Space, Flex } from "antd";
 import type { InputProps } from "antd";
 import type { GetProps } from 'antd';
-import { useQueryRAGMutation } from "@/store/apis/ragAPI";
+import { RAGContext, useQueryRAGMutation } from "@/store/apis/ragAPI";
 import Scrollbars from "rc-scrollbars";
 import { Link } from "react-router-dom";
+import Paragraph from "antd/es/typography/Paragraph";
 
 type SearchProps = GetProps<typeof Input.Search>;
 
@@ -33,23 +34,18 @@ const initialQueries = [
   },
 ];
 
-type Message = {
-  sender: "user" | "ai";
+export type Message = {
+  role: 'human' | 'ai';
   content: string;
+  context?: RAGContext[];
+  followUpQuestions?: string;
 };
-type Context = {
-  id: string;
-  metadata: {
-    source: string;
-  };
-  page_content: string;
-  type: string;
-};
+
+
 
 const AIAssistant = () => {
   const { token } = useToken();
   const [messages, setMessages] = useState<Message[]>([]);
-  const [context, setContext] = useState<Context[]>([]);
   const [showInitial, setShowInitial] = useState(true);
   const [loading, setLoading] = useState(false);
   const [inputValue, setInputValue] = useState(""); // State for input value
@@ -61,10 +57,10 @@ const AIAssistant = () => {
     if (!trimmedValue) return;
 
     setInputValue(""); // Clear the input after submission
-    setContext([]);
+
 
     // Add user message to the conversation
-    const newMessages = [...messages, { sender: "user", content: trimmedValue }];
+    const newMessages = [...messages, { role: 'human', content: trimmedValue }];
     setMessages(newMessages as any);
     setShowInitial(false);
     setLoading(true);
@@ -72,19 +68,24 @@ const AIAssistant = () => {
     try {
       // Call your AI API here and get the response
       // For demonstration, we'll use a mock response with a timeout
-      const aiResponse = await queryRAG({query:trimmedValue}).unwrap();
+      const aiResponse = await queryRAG({query:trimmedValue,  chat_history: messages}).unwrap();
 
       // Add AI response to the conversation
       setMessages((prevMessages) => [
         ...prevMessages,
-        { sender: "ai", content: aiResponse.answer.answer },
+        {
+          role: 'ai',
+          content: aiResponse.result.answer,
+          context: aiResponse?.result.context,
+          followUpQuestions: aiResponse?.follow_up_questions,
+        },
       ]);
-      setContext(aiResponse.answer.context);
+
     } catch (error) {
       // Handle API errors
       setMessages((prevMessages) => [
         ...prevMessages,
-        { sender: "ai", content: "Sorry, something went wrong." },
+        { role: 'ai', content: 'Sorry, something went wrong.' },
       ]);
     } finally {
       setLoading(false);
@@ -148,60 +149,105 @@ const AIAssistant = () => {
               renderItem={(item) => (
                 <List.Item
                   style={{
-                    display: "flex",
+                    display: 'flex',
                     justifyContent:
-                      item.sender === "user" ? "flex-end" : "flex-start",
+                      item.role === 'human' ? 'flex-end' : 'flex-start',
                   }}
                 >
                   <div
                     style={{
-                      maxWidth: "90%",
-                      padding: "0.5rem 1rem",
-                      borderRadius: "15px",
+                      maxWidth: '90%',
+                      padding: '0.5rem 1rem',
+                      borderRadius: '15px',
                       backgroundColor:
-                        item.sender === "user"
+                        item.role === 'human'
                           ? token.colorBgLayout
                           : 'transparent',
                       color:
-                        item.sender === "user"
+                        item.role === 'human'
                           ? token.colorPrimaryText
                           : token.colorText,
                     }}
                   >
-                     <ReactMarkdown rehypePlugins={[rehypeSanitize]}>
+                    {/* <Typography.Text>{item.content}</Typography.Text> */}
+                    <ReactMarkdown rehypePlugins={[rehypeSanitize]}>
                       {item.content}
                     </ReactMarkdown>
-                    {item.sender === 'ai' && context && context.length > 0 && (
-                      <div
-                        style={{
-                          background: 'rgba(0,0,0,0.1)',
-                          padding: '1rem',
-                          marginTop: '1rem',
-                        }}
-                      >
+                    {item.role === 'ai' &&
+                      item.context &&
+                      item.context.length > 0 && (
+                        <div
+                          style={{
+                            background: 'rgba(0,0,0,0.1)',
+                            padding: '1rem',
+                            marginTop: '1rem',
+                            marginBottom: '1rem',
+                          }}
+                        >
+                          <Typography.Title
+                            level={5}
+                            style={{ margin: '0 0 10px' }}
+                          >
+                            References:
+                          </Typography.Title>
+                          <ul>
+                            {item.context.map((item) => {
+                              const transformedUrl = item.metadata.source;
+                              return (
+                                <Link
+                                  to={transformedUrl}
+                                  target="_blank" // You still need this for opening in a new tab
+                                  rel="noopener noreferrer"
+                                >
+                                  <li
+                                    key={item.id}
+                                    style={{
+                                      margin: '5px 0',
+                                      wordWrap: 'break-word',
+                                    }}
+                                  >
+                                    {transformedUrl}
+                                  </li>
+                                </Link>
+                              );
+                            })}
+                          </ul>
+                        </div>
+                      )}
+                    {item.role === 'ai' && item.followUpQuestions && (
+                      <>
                         <Typography.Title
                           level={5}
                           style={{ margin: '0 0 10px' }}
                         >
-                          References:
+                          Follow Up Questions:
                         </Typography.Title>
-                        <ul>
-                          {context.map((item) => {
-                           
+                        {item.followUpQuestions
+                          .split('\n')
+                          .map((question, index) => {
                             return (
-                              <Link
-                                to={item.metadata.source}
-                                target="_blank" // You still need this for opening in a new tab
-                                rel="noopener noreferrer"
+                              <div
+                                key={index}
+                                onClick={() => handleSearch(question)}
+                                style={{
+                                  background: 'rgba(0,0,0,0.1)',
+                                  display: 'inline-block',
+                                  margin: '0 0 10px',
+                                  fontWeight: '700',
+                                  padding: '10px',
+                                  borderRadius: '5px',
+                                  cursor: 'pointer',
+                                }}
                               >
-                                <li key={item.id} style={{ margin: '5px 0', wordWrap:'break-word' }}>
-                                  { item.metadata.source}
-                                </li>
-                              </Link>
+                                <Paragraph
+                                  style={{ fontSize: '11px', margin: '0' }}
+                                >
+                                  {index + 1}: {question}
+                                </Paragraph>
+                              </div>
                             );
                           })}
-                        </ul>
-                      </div>
+                      </>
                     )}
                   </div>
                 </List.Item>
