@@ -15,9 +15,11 @@
         display: flex;
         width: 100%;
         min-height: 100vh;
+
         .main-body{
-            flex: 0 0 70%;
-            max-width: 70%;
+            flex: 0 0 100%;
+            max-width: 100%;
+            transition: all 0.3s ease-in-out;
         }
         .main-sidebar{
             flex: 0 0 30%;
@@ -25,6 +27,14 @@
             padding: 0 1rem;
             background: #f3f3f3;
             border-left: 1px solid $borderColor;
+        }
+    }
+    .assistant-open{
+        .main-layout{
+            .main-body{
+                flex: 0 0 calc(100% - 450px);
+                max-width: calc(100%  - 450px);
+            }
         }
     }
 }
@@ -37,4 +47,44 @@
     .main-sidebar{
         display: none;
     }
+}
+
+.assistant-sidebar{
+    height: 100%;
+    width: 450px;
+    background: white;
+    transform: translateX(100%);
+    opacity: 0;
+    transition: all 0.3s ease;
+    border-left: 1px solid gainsboro;
+    position: fixed;
+    right: 0;
+    top: 0;
+ 
+}
+.assistant-open{
+    .assistant-sidebar{
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.banner-wrapper{
+    position: relative;
+    &::after{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        position: absolute;
+        z-index: -1;
+    }
+}
+.search-box-wrapper{
+    max-width:700px;
+    margin: 0 auto;
+   
 }

@@ -68,7 +68,7 @@ const NewMobankRegistration = () => {
 
     <Container width="sm">
 
-      <Row>
+      {/* <Row>
         <Col xs={24} style={{marginBottom:"2rem"}}>
 
         <Breadcrumb>
@@ -95,7 +95,7 @@ const NewMobankRegistration = () => {
           </Breadcrumb>
         
         </Col>
-      </Row>
+      </Row> */}
       <Row>
         <Col xs={24}>
          <Card title="New Mobile Banking Registration">

@@ -34,6 +34,7 @@
   width: calc(100% - $sidebarWidth);
   left: $sidebarWidth;
   z-index: 9;
+  background-color: $white;
 }
 
 .headerMenuItem {

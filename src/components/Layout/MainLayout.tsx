@@ -12,6 +12,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
     <>
       <MenuProvider>
+        
         <Header />
         <div className={styles.mainLayout}>
           <div className={styles.sidebarContainer}>

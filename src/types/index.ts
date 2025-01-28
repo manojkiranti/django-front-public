@@ -25,7 +25,7 @@ export interface MenuType {
   children?: MenuType[];
   subNavigation?: MenuType[];
   parentKey?: string;
-  tabs?: MenuTabType[];
+
 }
 
 export type SelectCardDataType = {

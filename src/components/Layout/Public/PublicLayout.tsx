@@ -1,12 +1,18 @@
 import { FC, ReactNode, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Col, Flex, Row, AutoComplete, Input } from 'antd';
+import { Button, Col, Flex, Row, AutoComplete, Input, Typography } from 'antd';
 import type { AutoCompleteProps } from 'antd';
 import { Container } from '../../Elements';
 import { routes } from '@/constant/routes';
 import { LOGO } from '@/constant/assets';
 import styles from './PublicLayout.module.scss';
 import Sidebar from '../Sidebar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRobot } from '@fortawesome/pro-light-svg-icons';
+import APPS from "@/assets/images/apps.jpg";
+import Assistant from '../Assistant';
+import Banner from '../Banner';
+import NavBar from '../Navbar';
 const mockVal = (str: string, repeat = 1) => ({
   value: str.repeat(repeat),
 });
@@ -46,9 +52,13 @@ const Header = () => {
       setInputValue(value); // Otherwise, set to the user-typed input
     }
   };
+
+  const handleViewAssistant = () => {
+    document.body.classList.toggle('assistant-open');
+  }
   return (
     <header className={styles.publicHeader}>
-      <Container width="sm">
+      <Container >
         <Row gutter={30} align="middle">
           <Col md={11} xs={24}>
             <div className={styles.logoWrapper}>
@@ -57,6 +67,12 @@ const Header = () => {
           </Col>
           <Col md={13} xs={24}>
             <Flex justify="flex-end">
+              <div className='bankify-bot' onClick={handleViewAssistant}>
+                <FontAwesomeIcon icon={faRobot} />
+                <Typography style={{color:"#fff", fontSize:"16px"}}>Ask Genie AI Assistant</Typography>
+              </div>
+            </Flex>
+            {/* <Flex justify="flex-end">
               <div style={{width:"100%", position:"relative"}}>
               <AutoComplete
                   options={options}
@@ -71,7 +87,7 @@ const Header = () => {
                   <Input.Search size="large" style={{height:"55px"}} placeholder="Search..." enterButton />
                 </AutoComplete>
               </div>
-            </Flex>
+            </Flex> */}
           </Col>
         </Row>
       </Container>
@@ -108,11 +124,27 @@ interface PublicLayoutProps {
 const PublicLayout: FC<PublicLayoutProps> = ({ children }) => {
   return <div className="main-layout">
           <div className="main-body">
-             <Header />
+            <div className='banner-wrapper' style={{
+              backgroundImage: `url(${APPS})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+        
+              top: 0,
+              left: 0,
+              width: "100%",
+              position:"relative",
+              zIndex:1,
+ 
+            }}>
+                <Header />
+                <Banner />
+            </div>
+             <NavBar />
              {children}
           </div>
-          <div className="main-sidebar">
-            <Sidebar />
+         
+          <div className="assistant-sidebar">
+            <Assistant />
           </div>
     </div>;
 };

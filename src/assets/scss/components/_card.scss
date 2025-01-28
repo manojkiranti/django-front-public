@@ -4,22 +4,23 @@
 }
 .service{
     display: flex;
-    width: 120px;
+    // width: 120px;
     flex-direction: column;
     justify-content: center;
     text-align: center;
     align-items: center;
-    max-width: 130px;
-    height: 130px;
-    margin-bottom: 1rem;
+    // max-width: 130px;
+    // height: 130px;
+    margin-bottom: 2rem;
     // border: 1px solid rgba(22, 22, 22, 0.08);
     transition: all 0.3s ease-in-out;
     cursor: pointer;
     border-radius: 20px;
     // background: rgb(229 229 229 / 40%);
-    border: 1px solid gainsboro;
-    padding: 10px;
-
+    // border: 1px solid gainsboro;
+    // padding: 10px;
+    width: 150px;
+    max-width: 100%;
     .service-icon{
       color: $primary;
     //   border-color: $primary;
@@ -27,7 +28,7 @@
     //   border-width: 1px;   
     //   width: 66px;
     //   height: 66px;
-      border-radius: 100%;
+      border-radius: 8px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -36,7 +37,9 @@
       transition: all 0.3s ease-in-out;
       font-size: 22px;
       background: rgb(229 229 229 / 40%);
-     
+      border: 1px solid gainsboro;
+      width: 61px;
+      height: 61px;
     }
     .service-title{
         transition: all 0.3s ease-in-out;
@@ -52,4 +55,26 @@
     //         // color: $white!important;
     //     }
     // }
+}
+.query-col{
+  flex: 0 0 50%;
+  max-width: 50%;
+  padding: 0 5px;
+}
+.query-card{
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  padding: 10px;
+  display: inline-flex;
+  height: 70px;
+  align-items: center;
+  justify-content: center;
+  
+  margin-bottom: 10px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  &:hover{
+    background: #fafafa;
+  }
 }

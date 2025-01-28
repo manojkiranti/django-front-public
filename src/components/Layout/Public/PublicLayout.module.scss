@@ -25,6 +25,9 @@ Layout within the container
 
 .publicHeader{
     padding: 1rem 0;
+    position: relative;
+    z-index: 9;
+    background-color: $white;
 }
 .publicFooter{
     padding: 1rem 0;

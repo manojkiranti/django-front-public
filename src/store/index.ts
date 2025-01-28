@@ -14,6 +14,7 @@ import common from './slices/common/commonSlice';
 import { profileAPI } from '@/pages/profile/api/profileAPI';
 import { dashboardAPI } from './apis/dashboardApi';
 import { dealAPI } from '@/pages/mortgage/apis/dealAPI';
+import { ragAPI } from './apis/ragAPI';
 
 export const store = configureStore({
   reducer: {
@@ -27,6 +28,7 @@ export const store = configureStore({
     [profileAPI.reducerPath]: profileAPI.reducer,
     [dashboardAPI.reducerPath]: dashboardAPI.reducer,
     [dealAPI.reducerPath]: dealAPI.reducer,
+    [ragAPI.reducerPath]:ragAPI.reducer,
     auth: auth,
     common: common,
   },
@@ -42,6 +44,7 @@ export const store = configureStore({
       profileAPI.middleware,
       dashboardAPI.middleware,
       dealAPI.middleware,
+      ragAPI.middleware
     ),
 });
 

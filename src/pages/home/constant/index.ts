@@ -1,10 +1,80 @@
 import { faCreditCard, faCreditCardFront, faWindowRestore, faBan, faLockOpen, 
     faMobile, faMobileRetro, faSignalStreamSlash, faCheckToSlot, faMoneyBillTransfer, faBadgeCheck, 
     faSackDollar, faMoneyCheckPen, faShield, faMessageDots, faOctagonExclamation, faFileCertificate, faCloudCheck,
-    faHome, faCoin, faMoneyBillTrendUp
+    faHome, faCoin, faMoneyBillTrendUp, faMobileNotch, faRouter, faLightbulb, faPlaneDeparture, faFaucetDrip, faPhoneRotary,
+    faUniversity, faTvRetro, faHandsHeart
  } from "@fortawesome/pro-light-svg-icons";
 
-
+export const paymentServices = [
+    {
+        icon: faMobileNotch,
+        title: "Topup",
+        offer: "1-2% cashback",
+        link: "/payment/topup",
+        parentId: 'payments',
+        key:'topup'
+    },
+    {
+        icon: faRouter,
+        title: "Internet",
+        offer: "2% cashback",
+        link: "/payment/internet",
+        parentId: 'payments',
+        key:'internet',
+    },
+    {
+        icon: faLightbulb,
+        title: "Electricity",
+        link: "/payment/electricity",
+        parentId: 'payments',
+        key:'electricity'
+      },
+      {
+        icon: faPlaneDeparture,
+        title: "Flight",
+        offer: "5-6% cashback",
+        link: "/payment/flight",
+        parentId: 'payments',
+        key:'flight'
+      },
+      {
+        icon: faFaucetDrip,
+        title: "Khanipani",
+        link: "/payment/khanipani",
+        parentId: 'payments',
+        key:'khanipani'
+      },
+      {
+        icon: faPhoneRotary,
+        title: "Landline",
+        offer: "1% cashback",
+        link: "/payment/landline",
+        parentId: 'payments',
+        key:'landline'
+      },
+      {
+        icon: faUniversity,
+        title: "Government Payment",
+        link: "/payment/government-payment",
+        parentId: 'payments',
+        key:'government-payment',
+      },
+      {
+        icon: faTvRetro,
+        title: "TV",
+        offer: "5% cashback",
+        link: "/payment/tv",
+        parentId: 'payments',
+        key:'tv',
+      },
+      {
+        icon: faHandsHeart,
+        title: "Insurance",
+        link: "/payment/insurance",
+        parentId: 'payments',
+        key:'insurance'
+      },
+]
 export const cardServices = [
     {
         title: "New Debit Card",
@@ -42,25 +112,25 @@ export const mobileBankingServices = [
     {
         title: "New Registration",
         icon: faMobile,
-        link: 'mobank/new-registration',
+        link: 'new-registration',
         name: 'mobankRegister'
     },
     {
         title: "PIN Reset",
         icon: faMobileRetro,
-        link: 'mobank/reset-pin',
+        link: 'reset-pin',
         name: 'mobankPinReset'
     },
     {
         title: "Deactivate",
         icon: faSignalStreamSlash,
-        link: 'mobank/deactivate',
+        link: 'deactivate',
         name: 'mobankDeactivate'
     },
     {
         title: "Activate",
         icon: faCheckToSlot,
-        link: 'mobank/activate',
+        link: 'activate',
         name: 'mobankActivate'
     }
 ]

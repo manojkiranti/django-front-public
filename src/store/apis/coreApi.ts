@@ -31,7 +31,7 @@ export const coreAPI = createApi({
           data: transformedData,
         }
         return{
-          url: 'api/service/initiate/',
+          url: 'api/customer-service-request',
           method: 'POST',
           body: payload
         }

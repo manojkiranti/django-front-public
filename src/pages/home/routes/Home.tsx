@@ -9,6 +9,8 @@ import {
   loanServices,
   mobileBankingServices,
   
+  paymentServices,
+  
   tellerServices,
 } from "../constant";
 import { ReactNode } from "react";
@@ -16,7 +18,7 @@ import Banner from "../components/Banner";
 
 export const SectionHeading = ({ children }: { children: ReactNode }) => {
   return (
-    <Typography.Title level={3} style={{ marginBottom: "1.5rem" }}>
+    <Typography.Title level={3} style={{ marginBottom: "1.5rem", textAlign:"center" }}>
       {children}
     </Typography.Title>
   );
@@ -24,7 +26,7 @@ export const SectionHeading = ({ children }: { children: ReactNode }) => {
 const Home = () => {
   return (
     <>
-     <Container width="sm">
+     <Container>
             {/* <Row>
               <Col xs={24}>
                  <Banner />
@@ -32,126 +34,24 @@ const Home = () => {
             </Row> */}
             <Row>
               <Col xs={24}>
-                <SectionHeading>Card Services</SectionHeading>
+                <SectionHeading>Payments</SectionHeading>
               </Col>
             </Row>
-            <Flex gap={20} wrap="wrap">
-              {cardServices.map((service) => {
+            <Flex gap={20} wrap="wrap" >
+              {paymentServices.map((service) => {
                 return (
-                  <div className="flex-column" key={service.name}>
+                  <div className="flex-column" key={service.key}>
                     <ServiceBox
                       icon={service.icon}
                       title={service.title}
                       link={service.link}
+                      offer={service.offer}
                     />
                   </div>
                 );
               })}
             </Flex>
 
-            <Row>
-              <Col xs={24}>
-                <SectionHeading>Mobile Banking</SectionHeading>
-              </Col>
-            </Row>
-            <Flex gap={20} wrap="wrap">
-              {mobileBankingServices.map((service) => {
-                return (
-                  <div className="flex-column" key={service.name}>
-                    <ServiceBox
-                      icon={service.icon}
-                      title={service.title}
-                      link={service.link}
-                    />
-                  </div>
-                );
-              })}
-            </Flex>
-
-            <Row>
-              <Col xs={24}>
-                <SectionHeading>
-                  Customer Services
-                </SectionHeading>
-              </Col>
-            </Row>
-            <Flex gap={20} wrap="wrap">
-              {customerServices.map((service) => {
-                return (
-                  <div className="flex-column" key={service.name}>
-                    <ServiceBox
-                      icon={service.icon}
-                      title={service.title}
-                      link={service.link}
-                    />
-                  </div>
-                );
-              })}
-            </Flex>
-
-            <Row>
-              <Col xs={24}>
-                <SectionHeading>
-                  Teller Services
-                </SectionHeading>
-              </Col>
-            </Row>
-            <Flex gap={20} wrap="wrap">
-              {tellerServices.map((service) => {
-                return (
-                  <div className="flex-column" key={service.name}>
-                    <ServiceBox
-                      icon={service.icon}
-                      title={service.title}
-                      link={service.link}
-                    />
-                  </div>
-                );
-              })}
-            </Flex>
-
-            <Row>
-              <Col xs={24}>
-                <SectionHeading>
-                  Loans
-                </SectionHeading>
-              </Col>
-            </Row>
-            <Flex gap={20} wrap="wrap">
-              {loanServices.map((service) => {
-                return (
-                  <div className="flex-column" key={service.name}>
-                    <ServiceBox
-                      icon={service.icon}
-                      title={service.title}
-                      link={service.link}
-                    />
-                  </div>
-                );
-              })}
-            </Flex>
-            
-            
-            <Row>
-              <Col xs={24}>
-                <SectionHeading>
-                  Document Verification
-                </SectionHeading>
-              </Col>
-            </Row>
-            <Flex gap={20} wrap="wrap">
-              {documentVerificationServices.map((service) => {
-                return (
-                  <div className="flex-column" key={service.name}>
-                    <ServiceBox
-                      icon={service.icon}
-                      title={service.title}
-                      link={service.link}
-                    />
-                  </div>
-                );
-              })}
-            </Flex>
 
             
           </Container>

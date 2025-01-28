@@ -38,13 +38,13 @@ Layout within the container
   justify-content: flex-start;
 }
 
-// .mainBodyContainer {
-//     flex: 1;
+.mainBodyContainer {
+    flex: 1;
 
-//     &.collapsedSidebar {
-//         margin-left: 90px;
-//     }
-// }
+    &.collapsedSidebar {
+        margin-left: 90px;
+    }
+}
 
 .sidebarContainer {
   width: $sidebarWidth;
