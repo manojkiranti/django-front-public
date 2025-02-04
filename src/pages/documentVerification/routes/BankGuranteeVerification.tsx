@@ -73,34 +73,6 @@ const BankGuranteeVerification = () => {
     <Container width="sm">
 
       <Row>
-        <Col xs={24} style={{marginBottom:"2rem"}}>
-
-          <Breadcrumb>
-            <Breadcrumb.Item>
-              <Link to="/">
-                <HomeOutlined />
-              </Link>
-             </Breadcrumb.Item>
-
-             <Breadcrumb.Item>
-                <Dropdown menu={{items:documentVerificationMenu}}>
-                  <a href="#" onClick={e => e.preventDefault()}>
-                    <Space>
-                        Document Verification
-                       <DownOutlined />
-                    </Space>
-                  </a>
-                </Dropdown>
-             </Breadcrumb.Item>
-
-             <Breadcrumb.Item>
-                Bank Gurantee Verification
-            </Breadcrumb.Item>
-          </Breadcrumb>
-        
-        </Col>
-      </Row>
-      <Row>
         <Col xs={24}>
          <Card title="Bank Gurantee Verification">
              <form onSubmit={handleSubmit(onSubmit)}>

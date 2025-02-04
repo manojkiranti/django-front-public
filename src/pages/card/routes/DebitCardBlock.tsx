@@ -66,33 +66,7 @@ const DebitCardBlock = () => {
 
     <Container width="sm">
 
-      <Row>
-        <Col xs={24} style={{marginBottom:"2rem"}}>
-          <Breadcrumb>
-            <Breadcrumb.Item>
-              <Link to="/">
-                <HomeOutlined />
-              </Link>
-             </Breadcrumb.Item>
-
-             <Breadcrumb.Item>
-                <Dropdown menu={{items:cardMenuItems}}>
-                  <a href="#" onClick={e => e.preventDefault()}>
-                    <Space>
-                        Card Services
-                       <DownOutlined />
-                    </Space>
-                  </a>
-                </Dropdown>
-             </Breadcrumb.Item>
-
-             <Breadcrumb.Item>
-                Debit Card Block
-            </Breadcrumb.Item>
-          </Breadcrumb>
-        
-        </Col>
-      </Row>
+     
       <Row>
         <Col xs={24}>
          <Card title="Debit Card Block">

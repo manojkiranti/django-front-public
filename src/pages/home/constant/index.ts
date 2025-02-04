@@ -79,31 +79,31 @@ export const cardServices = [
     {
         title: "New Debit Card",
         icon: faCreditCard,
-        link: 'card/new-debit-card',
+        link: 'new-debit-card',
         name: 'newDebitCard'
     },
     {
         title: "New Credit Card",
         icon: faCreditCardFront,
-        link: 'card/new-credit-card',
+        link: 'new-credit-card',
         name: 'newCreditCard'
     },
     {
         title: "Re-Pin Debit Card",
         icon: faWindowRestore,
-        link: 'card/repin-request',
+        link: 'repin-request',
         name: 'repinDebitCard'
     },
     {
         title: "Debit Card Block",
         icon: faBan,
-        link: 'card/debit-card-block',
+        link: 'debit-card-block',
         name: 'debitCardBlock'
     },
     {
         title: "Debit Card Unblock",
         icon: faLockOpen,
-        link: 'card/debit-card-unblock',
+        link: 'debit-card-unblock',
         name: 'debitCardUnblock'
     }
 ]
@@ -139,43 +139,43 @@ export const customerServices = [
     {
         title: "Open Fixed Deposit",
         icon: faMoneyBillTransfer,
-        link: 'customer-service/fixed-deposit',
+        link: 'fixed-deposit',
         name: 'fdOpenAccount'
     },
     {
         title: "Dispute Claim",
         icon: faBadgeCheck,
-        link: 'customer-service/dispute-claim',
+        link: 'dispute-claim',
         name: 'disputeClaim'
     },
     {
         title: "Block Account(Hack/Scam)",
         icon: faShield,
-        link: 'customer-service/account-freeze',
+        link: 'account-freeze',
         name: 'accountFreeze'
     },
     {
         title: "Cheque Request",
         icon: faMessageDots,
-        link: 'customer-service/cheque-request',
+        link: 'cheque-request',
         name: 'chequeRequest'
     },
     {
         title: "Cheque Stop",
         icon: faOctagonExclamation,
-        link: 'customer-service/cheque-stop',
+        link: 'cheque-stop',
         name: 'chequeStop'
     },
     {
         title: "Balance Certificate",
         icon: faFileCertificate,
-        link: 'customer-service/balance-certificate-request',
+        link: 'balance-certificate-request',
         name: 'balanceCertificate'
     },
     {
         title: "Locker Request",
         icon: faFileCertificate,
-        link: 'customer-service/locker-request',
+        link: 'locker-request',
         name: 'lockerRequest'
     }
 ]
@@ -185,13 +185,13 @@ export const tellerServices = [
     {
         title: "Cash Deposit",
         icon: faSackDollar,
-        link: 'teller-service/cash-deposit',
+        link: 'cash-deposit',
         name: 'cashDeposit'
     },
     {
         title: "Cheque Deposit",
         icon: faMoneyCheckPen,
-        link: 'teller-service/cheque-deposit',
+        link: 'cheque-deposit',
         name: 'chequeDeposit'
     }
 ]
@@ -200,7 +200,7 @@ export const documentVerificationServices = [
     {
         title: "Bank Gurantee Verification",
         icon: faCloudCheck,
-        link: 'document-verification/bank-guarantee',
+        link: 'bank-guarantee',
         name: 'bankGuraneeVerification'
     }
 ]
@@ -209,25 +209,25 @@ export const loanServices = [
     {
         title: "Home Loan",
         icon: faHome,
-        link: 'loan/home-loan',
+        link: 'home-loan',
         name: 'homeLoan'
     },
     {
         title: "Gold Loan",
         icon: faCoin,
-        link: 'loan/gold-loan',
+        link: 'gold-loan',
         name: 'goldLoan'
     },
     {
         title: "Loan Against Share",
         icon: faMoneyBillTrendUp,
-        link: 'loan/loan-against-share',
+        link: 'loan-against-share',
         name: 'loanAgainstShare'
     },
     {
         title: "Credit Card",
         icon: faCreditCard,
-        link: 'loan/credit-card-loan',
+        link: 'credit-card-loan',
         name: 'creditCardLoan'
     }
 ]

@@ -42,7 +42,7 @@ export const MobankRoutes: React.FC = () => {
           <Tabs
             activeKey={activeKey}
             tabPosition="left"
-            style={{ height: 220 }}
+            style={{ height: "calc(100vh - 520px)" }}
             onChange={handleTabChange}
             items={mobileBankingServices.map(service => ({
               label: (
@@ -52,19 +52,19 @@ export const MobankRoutes: React.FC = () => {
                 </span>
               ),
               key: service.link, // Use relative path as key
-              children: <Outlet />, // Placeholder for nested routes
+              children:       <Routes>
+              <Route path="new-registration" element={<NewMobankRegistration />} />
+              <Route path="reset-pin" element={<MobankResetPin />} />
+              <Route path="deactivate" element={<MobankBlock />} />
+              <Route path="activate" element={<MobankUnBlock />} />
+              {/* Redirect any unknown paths to the default route */}
+              <Route path="*" element={<Navigate to={mobileBankingServices[0].link} replace />} />
+            </Routes>, // Placeholder for nested routes
             }))}
           />
 
           {/* Define nested routes */}
-          <Routes>
-            <Route path="new-registration" element={<NewMobankRegistration />} />
-            <Route path="reset-pin" element={<MobankResetPin />} />
-            <Route path="deactivate" element={<MobankBlock />} />
-            <Route path="activate" element={<MobankUnBlock />} />
-            {/* Redirect any unknown paths to the default route */}
-            <Route path="*" element={<Navigate to={mobileBankingServices[0].link} replace />} />
-          </Routes>
+    
         </Col>
       </Row>
     </Container>

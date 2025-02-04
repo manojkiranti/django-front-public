@@ -3,12 +3,22 @@ import { Col, Row, Typography } from "antd";
 import { AutoComplete, Input } from 'antd';
 import Paragraph from "antd/es/typography/Paragraph";
 import { SearchOutlined } from '@ant-design/icons';
-const options = [
-    { value: 'Burns Bay Road' },
-    { value: 'Downing Street' },
-    { value: 'Wall Street' },
-  ];
+import { routes } from "@/constant/routes";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 const Banner = () => {
+    const [searchValue, setSearchValue] = useState<string>('');
+    const navigate = useNavigate();
+    const handleOnChange  = (val:string) => {
+        console.log(val);
+        // navigate to the selected route or handle it as needed
+        // window.location.href = `/${val}`;
+        navigate(val)
+        const searchLabel = routes.find(route => route.value === val)?.label
+        setSearchValue(searchLabel as string)
+
+    }
     return (
         <>
             <div className="banner" style={{padding:"0.5rem 0 9rem"}}>
@@ -21,7 +31,10 @@ const Banner = () => {
                                 <div className="search-box-wrapper">
                                     <AutoComplete
                                         style={{ width: "100%", fontSize:"16px", textAlign:"left" }}
-                                        options={options}
+                                        options={routes}
+                                        onChange={handleOnChange}
+                                        value={searchValue}
+                    
                                         filterOption={(inputValue, option) =>
                                         option!.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
                                         }

@@ -39,13 +39,13 @@ export const MENU_ITEMS: MenuType[] = [
   {
     key: '5',
     label: 'Loans',
-    link: '/loans',
+    link: '/loan',
     icon: 'loan'
   },
   {
     key: '6',
     label: 'Documents',
-    link: '/documents',
+    link: '/document-verification',
     icon: 'document'
   },
 ];
