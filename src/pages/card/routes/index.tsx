@@ -26,7 +26,7 @@ export const CardRoutes = () => {
           <Tabs
             activeKey={activeKey}
             tabPosition="left"
-            style={{ height: "calc(100vh - 520px)" }}
+            // style={{ height: "calc(100vh - 520px)" }}
             onChange={handleTabChange}
             items={cardServices.map(service => ({
               label: (

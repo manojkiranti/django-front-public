@@ -1,6 +1,7 @@
 export type ApiResponse<T> = {
   success: boolean;
-  statusCode: number;
+  code: number;
+  message: string;
   data: T;
 };
 
@@ -76,4 +77,17 @@ export type ActionType = "debit_card_register" | "credit_card_register" | "repin
 export interface CustomerRequestPayload<T> {
   action: ActionType;
   data: T;
+}
+
+export interface ServiceRequestPayload {
+  product: string;
+  service_type: string;
+  props_value?: { [key: string]: any }; 
+  channel?:string;
+  accountNumber?:string;
+  accountName?:string;
+  email?:string;
+  phone?: string;
+  remarks?:string;
+  
 }

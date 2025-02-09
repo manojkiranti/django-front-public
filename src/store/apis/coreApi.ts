@@ -1,4 +1,4 @@
-import { ApiResponse, CustomerRequestPayload } from '@/types';
+import { ApiResponse, CustomerRequestPayload, ServiceRequestPayload } from '@/types';
 import { mapObjectKeysToSnakeCase } from '@/utils/mapper';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
@@ -23,24 +23,21 @@ export const coreAPI = createApi({
         return `/api/core/get_image?image_url=${encodeURIComponent(image_url)}`;
       },
     }),
-    customerServiceRequest: builder.mutation<ApiResponse<{pending_request_id: string}>, CustomerRequestPayload<any>>({
+    customerServiceRequest: builder.mutation<ApiResponse<{ref_number: string, service_type:string}>, ServiceRequestPayload>({
       query: (body) => {
-        const transformedData = mapObjectKeysToSnakeCase(body.data);
-        const payload = {
-          action: body.action,
-          data: transformedData,
-        }
+        const transformedData = mapObjectKeysToSnakeCase(body);
+        transformedData.channel = 'web';
         return{
           url: 'api/customer-service-request',
           method: 'POST',
-          body: payload
+          body: transformedData
         }
       },
     }),
-    serviceOtpVerify: builder.mutation<ApiResponse<{id: string, message: string}>, {pending_request_id:string, otp_code:string}>({
+    serviceOtpVerify: builder.mutation<ApiResponse<{id: string, message: string}>, {service_type:string, ref_number: string, otp:string}>({
       query: (body) => {
         return{
-          url: 'api/service/verify-otp/',
+          url: 'api/verify-customer-service-request',
           method: 'POST',
           body: body
         }

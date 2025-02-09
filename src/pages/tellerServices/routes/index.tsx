@@ -30,7 +30,7 @@ export const TellerRoutes = () => {
           <Tabs
             activeKey={activeKey}
             tabPosition="left"
-            style={{ height: "calc(100vh - 520px)" }}
+            // style={{ height: "calc(100vh - 520px)" }}
             onChange={handleTabChange}
             items={tellerServices.map(service => ({
               label: (

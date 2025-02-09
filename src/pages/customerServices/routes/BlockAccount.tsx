@@ -24,6 +24,7 @@ const BlockAccount = () => {
     const [messageApi, contextHolder] = message.useMessage();
     const [captchaValue, setCaptchaValue] = useState<string | null>(null);
     const [serviceId, setServiceId] = useState<string | null>(null);
+    const [serviceRefNumber, setServiceRefNumber] = useState<string | null>(null);
     const [postCustomerRequest, { isLoading }] =
     useCustomerServiceRequestMutation();
       
@@ -47,9 +48,12 @@ const BlockAccount = () => {
         messageApi.error("Please complete the reCAPTCHA to submit the form.")
         return;
       }
-      postCustomerRequest({action:"block_account", data}).unwrap()
+      postCustomerRequest({accountName: data.accountName, accountNumber: data.accountNumber, phone: data.phone,
+        props_value:{...data},
+      product:'CUSTOMER_SERVICE', service_type:'BLOCK_ACCOUNT'}).unwrap()
       .then(response => {
-        setServiceId(response.data.pending_request_id)
+        setServiceId(response.data.service_type)
+        setServiceRefNumber(response.data.ref_number)
         showOtpModal();
       }).catch(err => {
         displayError(err);
@@ -62,6 +66,7 @@ const BlockAccount = () => {
 
   const { showModal: showOtpModal, OtpModalComponent } = useOtpModal({
     serviceId: serviceId,
+    refNumber: serviceRefNumber,
     handleServiceSubmission: handleServiceSubmission
   });
 
@@ -71,7 +76,7 @@ const BlockAccount = () => {
 
     <Container width="sm">
 
-   
+    mobileNumber
       <Row>
         <Col xs={24}>
          <Card title="Block your account(Hack/Scam)">
@@ -103,9 +108,9 @@ const BlockAccount = () => {
                   <Col xs={24} md={8}>
                     <InputField
                       label="Mobile Number"
-                      name="mobileNumber"            
+                      name="phone"            
                       control={control}
-                      error={errors.mobileNumber?.message ?? ""}
+                      error={errors.phone?.message ?? ""}
                       placeholder="Enter your mobile number"
                       size="large"
                       required={true}

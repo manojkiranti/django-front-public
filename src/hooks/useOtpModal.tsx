@@ -8,10 +8,11 @@ import { displayError } from '@/utils/displayMessageUtils';
 interface UseOtpModalProps {
 
   serviceId: string | null;
+  refNumber: string | null;
   handleServiceSubmission: () => void;
 }
 
-const useOtpModal = ({ serviceId, handleServiceSubmission }: UseOtpModalProps) => {
+const useOtpModal = ({ serviceId, handleServiceSubmission, refNumber }: UseOtpModalProps) => {
   const [visible, setVisible] = useState<boolean>(false);
   const [verifyOtp, {isLoading:OtpVerifyLoading}] = useServiceOtpVerifyMutation();
 
@@ -20,8 +21,8 @@ const useOtpModal = ({ serviceId, handleServiceSubmission }: UseOtpModalProps) =
 
   const handleVerify = async (otp: string) => {
     try {
-      await verifyOtp({otp_code:otp, pending_request_id: serviceId as string}).unwrap();
-      message.success('Your request have been submitted successfully.');
+      const response = await verifyOtp({otp:otp, service_type: serviceId as string ,ref_number: refNumber as string}).unwrap();
+      message.success(response.message);
       hideModal();
       handleServiceSubmission();
     } catch (error: any) {

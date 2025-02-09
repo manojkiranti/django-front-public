@@ -32,6 +32,7 @@ const MobankUnBlock = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const [captchaValue, setCaptchaValue] = useState<string | null>(null);
   const [serviceId, setServiceId] = useState<string | null>(null);
+  const [serviceRefNumber, setServiceRefNumber] = useState<string | null>(null);
   const [postCustomerRequest, { isLoading }] =
     useCustomerServiceRequestMutation();
 
@@ -53,10 +54,11 @@ const MobankUnBlock = () => {
       messageApi.error("Please complete the reCAPTCHA to submit the form.");
       return;
     }
-    postCustomerRequest({ action: "mobile_banking_unblock", data })
+    postCustomerRequest({...data, product:'MOBILE_BANKING', service_type:'MOBILE_BANKING_UNBLOCK'})
       .unwrap()
       .then((response) => {
-        setServiceId(response.data.pending_request_id);
+        setServiceId(response.data.service_type)
+        setServiceRefNumber(response.data.ref_number)
         showOtpModal();
       })
       .catch((err) => {
@@ -70,7 +72,8 @@ const MobankUnBlock = () => {
 
   const { showModal: showOtpModal, OtpModalComponent } = useOtpModal({
     serviceId: serviceId,
-    handleServiceSubmission: handleServiceSubmission,
+    refNumber: serviceRefNumber,
+    handleServiceSubmission: handleServiceSubmission
   });
 
   return (
@@ -109,9 +112,9 @@ const MobankUnBlock = () => {
                   <Col xs={24} md={8}>
                     <InputField
                       label="Mobile Number"
-                      name="mobileNumber"
+                      name="phone"
                       control={control}
-                      error={errors.mobileNumber?.message ?? ""}
+                      error={errors.phone?.message ?? ""}
                       placeholder="Enter you registered mobile number"
                       size="large"
                       required={true}

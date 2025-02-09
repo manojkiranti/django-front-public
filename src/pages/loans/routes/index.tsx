@@ -29,7 +29,7 @@ export const LoanRoutes = () => {
           <Tabs
             activeKey={activeKey}
             tabPosition="left"
-            style={{ height: "calc(100vh - 520px)" }}
+            // style={{ height: "calc(100vh - 520px)" }}
             onChange={handleTabChange}
             items={loanServices.map(service => ({
               label: (

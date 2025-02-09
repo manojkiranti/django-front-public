@@ -29,7 +29,7 @@ export const DocumentVerificationRoutes = () => {
           <Tabs
             activeKey={activeKey}
             tabPosition="left"
-            style={{ height: "calc(100vh - 520px)" }}
+            // style={{ height: "calc(100vh - 520px)" }}
             onChange={handleTabChange}
             items={documentVerificationServices.map(service => ({
               label: (

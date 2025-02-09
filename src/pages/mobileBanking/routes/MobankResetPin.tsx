@@ -4,16 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Container } from "@/components/Elements";
-import { Button, Col, Row, message, Breadcrumb, Card, Dropdown, Space } from "antd";
+import { Button, Col, Row, message, Card } from "antd";
 
 import { InputField } from "@/components/Form";
-import { DownOutlined, HomeOutlined } from "@ant-design/icons";
 import { useCustomerServiceRequestMutation } from "@/store/apis/coreApi";
 import { displayError } from "@/utils/displayMessageUtils";
-import { mobankMenuItems } from "../constant";
 import { MobankResetPinType } from "../types";
 import { mobankResetPinSchema } from "../schema";
-import { Link } from "react-router-dom";
 import useOtpModal from "@/hooks/useOtpModal";
 
 const siteKey = import.meta.env.VITE_CAPTCHA_SITE_KEY;
@@ -23,6 +20,7 @@ const MobankResetPin = () => {
     const [messageApi, contextHolder] = message.useMessage();
     const [captchaValue, setCaptchaValue] = useState<string | null>(null);
     const [serviceId, setServiceId] = useState<string | null>(null);
+    const [serviceRefNumber, setServiceRefNumber] = useState<string | null>(null);
     const [postCustomerRequest, { isLoading }] =
     useCustomerServiceRequestMutation();
       
@@ -44,9 +42,10 @@ const MobankResetPin = () => {
         messageApi.error("Please complete the reCAPTCHA to submit the form.")
         return;
       }
-      postCustomerRequest({action:"mobile_banking_reset_pin", data}).unwrap()
+      postCustomerRequest({...data, product:'MOBILE_BANKING', service_type:'MOBILE_BANKING_REPIN'}).unwrap()
       .then(response => {
-        setServiceId(response.data.pending_request_id)
+        setServiceId(response.data.service_type)
+        setServiceRefNumber(response.data.ref_number)
         showOtpModal();
       }).catch(err => {
         displayError(err);
@@ -59,6 +58,7 @@ const MobankResetPin = () => {
 
   const { showModal: showOtpModal, OtpModalComponent } = useOtpModal({
     serviceId: serviceId,
+    refNumber: serviceRefNumber,
     handleServiceSubmission: handleServiceSubmission
   });
 
@@ -97,9 +97,9 @@ const MobankResetPin = () => {
                   <Col xs={24} md={8}>
                     <InputField
                       label="Mobile Number"
-                      name="mobileNumber"
+                      name="phone"
                       control={control}
-                      error={errors.mobileNumber?.message ?? ""}
+                      error={errors.phone?.message ?? ""}
                       placeholder="Enter you registered mobile number"
                       size="large"
                       required={true}

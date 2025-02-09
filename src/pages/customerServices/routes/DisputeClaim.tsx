@@ -23,6 +23,7 @@ const DisputeClaim = () => {
     const [messageApi, contextHolder] = message.useMessage();
     const [captchaValue, setCaptchaValue] = useState<string | null>(null);
     const [serviceId, setServiceId] = useState<string | null>(null);
+    const [serviceRefNumber, setServiceRefNumber] = useState<string | null>(null);
     const [postCustomerRequest, { isLoading }] =
     useCustomerServiceRequestMutation();
       
@@ -46,9 +47,11 @@ const DisputeClaim = () => {
         messageApi.error("Please complete the reCAPTCHA to submit the form.")
         return;
       }
-      postCustomerRequest({action:"dispute_claim", data}).unwrap()
+      postCustomerRequest({accountName: data.accountName, accountNumber: data.accountNumber, phone: data.phone,
+        props_value:{...data}, product:'CUSTOMER_SERVICE', service_type:'DISPUTE_CLAIM'}).unwrap()
       .then(response => {
-        setServiceId(response.data.pending_request_id)
+        setServiceId(response.data.service_type)
+        setServiceRefNumber(response.data.ref_number)
         showOtpModal();
       }).catch(err => {
         displayError(err);
@@ -61,6 +64,7 @@ const DisputeClaim = () => {
 
   const { showModal: showOtpModal, OtpModalComponent } = useOtpModal({
     serviceId: serviceId,
+    refNumber: serviceRefNumber,
     handleServiceSubmission: handleServiceSubmission
   });
 
@@ -174,9 +178,9 @@ const DisputeClaim = () => {
                   <Col xs={24} md={8}>
                     <InputField
                       label="Contact Number"
-                      name="contactNumber"            
+                      name="phone"            
                       control={control}
-                      error={errors.contactNumber?.message ?? ""}
+                      error={errors.phone?.message ?? ""}
                       size="large"
                       required={true}
                     />
