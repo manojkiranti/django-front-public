@@ -49,7 +49,7 @@ const BlockAccount = () => {
         return;
       }
       postCustomerRequest({accountName: data.accountName, accountNumber: data.accountNumber, phone: data.phone,
-        props_value:{...data},
+        prop_values:{...data},
       product:'CUSTOMER_SERVICE', service_type:'BLOCK_ACCOUNT'}).unwrap()
       .then(response => {
         setServiceId(response.data.service_type)

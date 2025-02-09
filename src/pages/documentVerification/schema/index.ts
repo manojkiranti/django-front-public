@@ -6,5 +6,6 @@ export const bankGuraneeVerificationSchema = yup.object().shape({
   referenceNumber: yup
     .string()
     .required('Reference number is required.'),
-  guranteeAmount: yup.number().required('Gurantee amount is required.')
+  guranteeAmount: yup.number().required('Gurantee amount is required.'),
+  phone: yup.string().required('Phone number is required.')
 });

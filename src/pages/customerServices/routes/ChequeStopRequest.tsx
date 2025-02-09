@@ -51,7 +51,7 @@ const ChequeStopRequest = () => {
         return;
       }
       postCustomerRequest({accountName: data.accountName, accountNumber: data.accountNumber, phone: data.phone,
-        props_value:{...data}, product:'CUSTOMER_SERVICE', service_type:'CHEQUE_STOP'}).unwrap()
+        prop_values:{...data}, product:'CUSTOMER_SERVICE', service_type:'CHEQUE_STOP'}).unwrap()
       .then(response => {
         setServiceId(response.data.service_type)
         setServiceRefNumber(response.data.ref_number)

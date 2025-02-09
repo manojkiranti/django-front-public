@@ -46,7 +46,7 @@ const RepinDebitCard = () => {
         return;
       }
       postCustomerRequest(
-        { accountName: data.accountName, accountNumber: data.accountNumber, phone: data.phone, props_value:{...data}, product:'CARD', service_type:'DEBIT_CARD_REPIN'}
+        { accountName: data.accountName, accountNumber: data.accountNumber, phone: data.phone, prop_values:{...data}, product:'CARD', service_type:'DEBIT_CARD_REPIN'}
       ).unwrap()
       .then(response => {
         setServiceId(response.data.service_type)

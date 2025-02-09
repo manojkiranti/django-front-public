@@ -3,7 +3,7 @@ import { Row, Col } from 'antd';
 
 import { Container } from '@/components/Elements';
 
-import Logo from '@/assets/images/Logo_odin.png';
+import Logo from '@/assets/images/genie.png';
 import styles from '../styles/Login.module.scss';
 interface AuthLayoutProps {
   children: ReactNode;
@@ -21,7 +21,7 @@ const AuthLayout: FC<AuthLayoutProps> = ({ children, banner }) => {
                 padding: '2rem',
               }}
             >
-              <img src={Logo} alt="Odin Mortgage" style={{ height: '40px' }} />
+              <img src={Logo} alt="Bank Genie" style={{ height: '40px' }} />
             </div>
             <div className={styles.formContainerStyles}>{children}</div>
           </Col>

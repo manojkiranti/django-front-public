@@ -82,7 +82,7 @@ export interface CustomerRequestPayload<T> {
 export interface ServiceRequestPayload {
   product: string;
   service_type: string;
-  props_value?: { [key: string]: any }; 
+  prop_values?: { [key: string]: any }; 
   channel?:string;
   accountNumber?:string;
   accountName?:string;

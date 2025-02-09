@@ -27,6 +27,7 @@ const BankGuranteeVerification = () => {
     const [messageApi, contextHolder] = message.useMessage();
     const [captchaValue, setCaptchaValue] = useState<string | null>(null);
     const [serviceId, setServiceId] = useState<string | null>(null);
+    const [serviceRefNumber, setServiceRefNumber] = useState<string | null>(null);
     const [postCustomerRequest, { isLoading }] =
     useCustomerServiceRequestMutation();
       
@@ -50,9 +51,11 @@ const BankGuranteeVerification = () => {
         messageApi.error("Please complete the reCAPTCHA to submit the form.")
         return;
       }
-      postCustomerRequest({action:"bank_gurantee_verification", data}).unwrap()
+      postCustomerRequest({accountName: data.accountNumber, accountNumber: data.accountNumber, phone: data.phone,
+        prop_values:{...data}, product:'TELLER_SERVICE', service_type:'CHEQUE_DEPOSIT'}).unwrap()
       .then(response => {
-        setServiceId(response.data.pending_request_id)
+        setServiceId(response.data.service_type)
+        setServiceRefNumber(response.data.ref_number)
         showOtpModal();
       }).catch(err => {
         displayError(err);
@@ -64,6 +67,7 @@ const BankGuranteeVerification = () => {
 
   const { showModal: showOtpModal, OtpModalComponent } = useOtpModal({
     serviceId: serviceId,
+    refNumber: serviceRefNumber,
     handleServiceSubmission: handleServiceSubmission
   });
   return (

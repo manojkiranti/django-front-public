@@ -47,7 +47,7 @@ const DebitCardUnBlock = () => {
         return;
       }
       postCustomerRequest({accountName: data.accountName, accountNumber: data.accountNumber, phone: data.phone, remarks: data.unblockReason,
-          props_value:{...data},
+          prop_values:{...data},
         product:'CARD', service_type:'DEBIT_CARD_UNBLOCK'}).unwrap()
       .then(response => {
         setServiceId(response.data.service_type)

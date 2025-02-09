@@ -55,7 +55,7 @@ const CashDeposit = () => {
       }
       data.accountNumber = data.depositAccountNumber
       postCustomerRequest({accountName: data.depositAccountName, accountNumber: data.accountNumber, phone: data.phone,
-        props_value:{...data}, product:'TELLER_SERVICE', service_type:'CASH_DEPOSIT'}).unwrap()
+        prop_values:{...data}, product:'TELLER_SERVICE', service_type:'CASH_DEPOSIT'}).unwrap()
       .then(response => {
         setServiceId(response.data.service_type)
         setServiceRefNumber(response.data.ref_number)

@@ -99,7 +99,8 @@ export const MenuProvider = ({ children }: { children: ReactNode }) => {
         link: activeItem.link as string,
       };
 
-      setActiveTabs([defaultItem, ...(activeItem.tabs || [])]);
+      // // ts-ignore
+      // setActiveTabs([defaultItem, ...(activeItem.tabs || [])]);
     }
   }, [location]);
 

@@ -26,6 +26,11 @@ export const coreAPI = createApi({
     customerServiceRequest: builder.mutation<ApiResponse<{ref_number: string, service_type:string}>, ServiceRequestPayload>({
       query: (body) => {
         const transformedData = mapObjectKeysToSnakeCase(body);
+        if(body.prop_values) {
+         const transformedPropsVaues =  mapObjectKeysToSnakeCase(body.prop_values);
+         transformedData.prop_values = transformedPropsVaues;
+        }
+        
         transformedData.channel = 'web';
         return{
           url: 'api/customer-service-request',
