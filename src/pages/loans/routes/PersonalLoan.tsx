@@ -20,6 +20,7 @@ import { replaceHyphenWithUnderscore } from "@/utils/commonUtils";
 import { error } from "console";
 const siteKey = import.meta.env.VITE_CAPTCHA_SITE_KEY;
 
+
 const PersonalLoan = () => {
     const navigate = useNavigate();
     const { loantype } = useParams<{ loantype: string }>();
@@ -37,6 +38,12 @@ const PersonalLoan = () => {
         "loan-against-share": "Loan Against Share",
         "credit-card-loan": "Credit Card"
     };
+
+    const loanServiceTypes: Record<string, string> = {
+      "home-loan": "HOME_LOAN",
+      "gold-loan": "GOLD_LOAN",
+      "loan-against-share": "LOAN_AGAINST_SHARE",
+  };
     
   const {
     control,
@@ -64,7 +71,7 @@ const PersonalLoan = () => {
         return;
       }
       postCustomerRequest({accountName: data.accountNumber, accountNumber: data.accountNumber, phone: data.phone,
-        prop_values:{...data}, product:'TELLER_SERVICE', service_type:'CHEQUE_DEPOSIT'}).unwrap()
+        prop_values:{...data}, product:'LOAN', service_type:loanServiceTypes[data.loanType]}).unwrap()
       .then(response => {
         setServiceId(response.data.service_type)
         setServiceRefNumber(response.data.ref_number)
@@ -145,7 +152,6 @@ const PersonalLoan = () => {
                             {label:"Home Loan", value:"home-loan"},
                             {label:"Gold Loan", value:"gold-loan"},
                             {label:"Loan Against Share", value:"loan-against-share"},
-                            {label:"Credit Card", value:"credit-card-loan"}
                         ]}
                         name="loanType"
                         control={control}

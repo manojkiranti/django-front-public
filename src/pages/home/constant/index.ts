@@ -224,10 +224,10 @@ export const loanServices = [
         link: 'loan-against-share',
         name: 'loanAgainstShare'
     },
-    {
-        title: "Credit Card",
-        icon: faCreditCard,
-        link: 'credit-card-loan',
-        name: 'creditCardLoan'
-    }
+    // {
+    //     title: "Credit Card",
+    //     icon: faCreditCard,
+    //     link: 'credit-card-loan',
+    //     name: 'creditCardLoan'
+    // }
 ]
