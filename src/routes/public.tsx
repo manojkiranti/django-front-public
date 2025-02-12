@@ -21,7 +21,10 @@ const { HomeRoutes } = lazyImport(
   () => import('@/pages/home'),
   'HomeRoutes',
 );
-
+const {PaymentRoutes} = lazyImport(
+  () => import('@/pages/payments'),
+  'PaymentRoutes',
+);
 const { CardRoutes } = lazyImport(
   () => import('@/pages/card'),
   'CardRoutes',
@@ -68,6 +71,10 @@ export const publicRoutes = [
       {
         path: '',
         element: <HomeRoutes />,
+      },
+      {
+        path: 'payment/*',
+        element: <PaymentRoutes />,
       },
       {
         path: 'card/*',

@@ -73,10 +73,6 @@ const BalanceCertificate = () => {
   return (
     <>
     {contextHolder}
-
-    <Container width="sm">
-
-    
       <Row>
         <Col xs={24}>
          <Card title="Balance Certificate">
@@ -194,7 +190,7 @@ const BalanceCertificate = () => {
           
         </Col>
       </Row>
-    </Container>
+
     {OtpModalComponent}
     </>
   );

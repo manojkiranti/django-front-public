@@ -69,7 +69,7 @@ const MobankBlock = () => {
     <>
     {contextHolder}
 
-    <Container width="sm">
+   
 
       <Row>
         <Col xs={24}>
@@ -129,7 +129,7 @@ const MobankBlock = () => {
           
         </Col>
       </Row>
-    </Container>
+  
     {OtpModalComponent}
     </>
   );

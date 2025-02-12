@@ -75,8 +75,6 @@ const ChequeRequest = () => {
     <>
     {contextHolder}
 
-    <Container width="sm">
-
       <Row>
         <Col xs={24}>
          <Card title="Cheque Request">
@@ -191,7 +189,7 @@ const ChequeRequest = () => {
           
         </Col>
       </Row>
-    </Container>
+
     {OtpModalComponent}
     </>
   );

@@ -5,12 +5,14 @@ import NewMobankRegistration from './NewMobankRegistration';
 import MobankResetPin from './MobankResetPin';
 import MobankBlock from './MobankBlock';
 import MobankUnBlock from './MobankUnblock';
-import { Col, Row, Tabs } from 'antd';
+import { Col, Row, Tabs, Grid } from 'antd';
 import { Container } from '@/components/Elements';
 import { mobileBankingServices } from '@/pages/home/constant';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Ensure you have this import if using icons
 
+const { useBreakpoint } = Grid;
 export const MobankRoutes: React.FC = () => {
+  const screens = useBreakpoint();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -34,14 +36,14 @@ export const MobankRoutes: React.FC = () => {
   //     navigate(mobileBankingServices[0].link, { replace: true });
   //   }
   // }, [location.pathname, navigate]);
-
+  const tabPosition = screens.md ? "left" : "top";
   return (
     <Container>
       <Row>
         <Col xs={24} md={24}>
           <Tabs
             activeKey={activeKey}
-            tabPosition="left"
+            tabPosition={tabPosition}
             // style={{ height: "calc(100vh - 520px)" }}
             onChange={handleTabChange}
             items={mobileBankingServices.map(service => ({

@@ -3,28 +3,17 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Container } from "@/components/Elements";
-import { Button, Col, Row, message, Breadcrumb, Card, Dropdown, Space } from "antd";
+import { Button, Col, Row, message,  Card } from "antd";
 
 import { InputField, SelectField } from "@/components/Form";
 import { BRANCH_LIST } from "@/constant/options";
-import { DownOutlined, HomeOutlined } from "@ant-design/icons";
 import { useCustomerServiceRequestMutation } from "@/store/apis/coreApi";
 import { displayError } from "@/utils/displayMessageUtils";
-import { tellerMenuItems } from "../constant";
 
 import { cashDepositSchema } from "../schema";
 import { CashDepositType } from "../types";
-import { Link } from "react-router-dom";
 import useOtpModal from "@/hooks/useOtpModal";
-
-
-
 const siteKey = import.meta.env.VITE_CAPTCHA_SITE_KEY;
-
-
-
-
 
 const CashDeposit = () => {
     const navigate = useNavigate();
@@ -78,38 +67,6 @@ const CashDeposit = () => {
   return (
     <>
     {contextHolder}
-
-    <Container width="sm">
-
-      <Row>
-        <Col xs={24} style={{marginBottom:"2rem"}}>
-
-
-          <Breadcrumb>
-            <Breadcrumb.Item>
-              <Link to="/">
-                <HomeOutlined />
-              </Link>
-             </Breadcrumb.Item>
-
-             <Breadcrumb.Item>
-                <Dropdown menu={{items:tellerMenuItems}}>
-                  <a href="#" onClick={e => e.preventDefault()}>
-                    <Space>
-                        Teller Services
-                       <DownOutlined />
-                    </Space>
-                  </a>
-                </Dropdown>
-             </Breadcrumb.Item>
-
-             <Breadcrumb.Item>
-                Cash Deposit
-            </Breadcrumb.Item>
-          </Breadcrumb>
-        
-        </Col>
-      </Row>
       <Row>
         <Col xs={24}>
          <Card title="Cash Deposit">
@@ -200,7 +157,7 @@ const CashDeposit = () => {
           
         </Col>
       </Row>
-    </Container>
+
     {OtpModalComponent}
     </>
   );

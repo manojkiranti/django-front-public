@@ -26,8 +26,10 @@ const Banner = () => {
                     <Row>
                         <Col xs={24} md={24}>
                             <div style={{maxWidth:"1080px", margin:"0 auto", textAlign:"center"}}>
-                                <Typography.Title level={2} style={{color:"#fff", marginBottom:"0.5rem"}}>One-Stop Hub for Smarter Banking!</Typography.Title>
-                                <Paragraph style={{color:"#fff", marginBottom:"2rem"}}>Bank Genie: Seamless Digital Banking for All Your Financial Needs.</Paragraph>
+                                <div className="banner-text-wrapper">
+                                    <Typography.Title level={2} style={{color:"#fff", marginBottom:"0.5rem"}}>One-Stop Hub for Smarter Banking!</Typography.Title>
+                                    <Paragraph style={{color:"#fff", marginBottom:"2rem"}}>Bank Genie: Seamless Digital Banking for All Your Financial Needs.</Paragraph>
+                                </div>
                                 <div className="search-box-wrapper">
                                     <AutoComplete
                                         style={{ width: "100%", fontSize:"16px", textAlign:"left" }}

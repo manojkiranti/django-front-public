@@ -66,7 +66,7 @@ const MobankResetPin = () => {
     <>
     {contextHolder}
 
-    <Container width="sm">
+
       <Row>
         <Col xs={24}>
          <Card title="Mobile Banking Reset Pin">
@@ -125,7 +125,7 @@ const MobankResetPin = () => {
           
         </Col>
       </Row>
-    </Container>
+
     {OtpModalComponent}
     </>
   );

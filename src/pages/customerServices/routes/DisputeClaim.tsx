@@ -72,8 +72,6 @@ const DisputeClaim = () => {
     <>
     {contextHolder}
 
-    <Container width="sm">
-
       <Row>
         <Col xs={24}>
          <Card title="Dispute Claim">
@@ -217,7 +215,7 @@ const DisputeClaim = () => {
           
         </Col>
       </Row>
-    </Container>
+
     {OtpModalComponent}
     </>
   );

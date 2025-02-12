@@ -3,6 +3,7 @@ import { Container } from "@/components/Elements";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Row, Col, Flex, Typography } from "antd";
 import {
+  faCreditCard,
   faMobile,
   faHeadset,
   faUserHairMullet,
@@ -15,7 +16,7 @@ import { MENU_ITEMS } from "@/devFrontData/menu";
 const iconMapper = {
   home: faHome,
   mobile: faMobile,
-  card: faHeadset,
+  card: faCreditCard,
   customer: faHeadset,
   teller: faUserHairMullet,
   loan: faMoneyBill,

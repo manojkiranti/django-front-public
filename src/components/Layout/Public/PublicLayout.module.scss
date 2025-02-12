@@ -44,6 +44,12 @@ Layout within the container
 
 @media only screen and (max-width: 767px) {
     .logoWrapper{
-        margin-bottom: 10px;
+    
+        > img {
+            max-width: 120px;
+        }
+    }
+    .publicHeader{
+        background-color: transparent;
     }
 }

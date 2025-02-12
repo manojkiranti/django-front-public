@@ -75,9 +75,6 @@ const FixedDeposit = () => {
     <>
     {contextHolder}
 
-    <Container width="sm">
-
-     
       <Row>
         <Col xs={24}>
          <Card title="Fixed Deposit">
@@ -209,7 +206,7 @@ const FixedDeposit = () => {
           
         </Col>
       </Row>
-    </Container>
+
     {OtpModalComponent}
     </>
   );

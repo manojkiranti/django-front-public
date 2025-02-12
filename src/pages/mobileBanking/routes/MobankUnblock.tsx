@@ -80,7 +80,7 @@ const MobankUnBlock = () => {
     <>
       {contextHolder}
 
-      <Container width="sm">
+ 
    
         <Row>
           <Col xs={24}>
@@ -143,7 +143,7 @@ const MobankUnBlock = () => {
             </Card>
           </Col>
         </Row>
-      </Container>
+  
       {OtpModalComponent}
     </>
   );

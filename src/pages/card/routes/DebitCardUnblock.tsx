@@ -71,9 +71,6 @@ const DebitCardUnBlock = () => {
   return (
     <>
     {contextHolder}
-
-    <Container width="sm">
-
     
       <Row>
         <Col xs={24}>
@@ -142,7 +139,7 @@ const DebitCardUnBlock = () => {
           
         </Col>
       </Row>
-    </Container>
+    
     {OtpModalComponent}
     </>
   );

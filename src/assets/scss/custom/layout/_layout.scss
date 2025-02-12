@@ -47,8 +47,30 @@
     .main-sidebar{
         display: none;
     }
-}
+    .banner-wrapper{
+        background: $primary!important;
+        
+    }
+    .banner{
 
+        padding-bottom: 2rem!important;
+        border-bottom: 1px solid $borderColor;
+    }
+    .banner-text-wrapper{
+        display: none;
+    }
+    .main-body{
+        padding-bottom: 70px;
+    }
+}
+@media only screen and (min-width: 767px) {
+    .assistant-open{
+        .assistant-sidebar{
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+}
 .assistant-sidebar{
     height: 100%;
     width: 450px;
@@ -62,10 +84,16 @@
     top: 0;
  
 }
-.assistant-open{
+@media only screen and (max-width: 767px) {
+    .assistant-open{
+        .assistant-sidebar{
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
     .assistant-sidebar{
-        transform: translateX(0);
-        opacity: 1;
+        width: 90%;
+        z-index: 99;
     }
 }
 

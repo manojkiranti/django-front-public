@@ -92,9 +92,6 @@ const PersonalLoan = () => {
   return (
     <>
     {contextHolder}
-
-    <Container width="sm">
-
   
       <Row>
         <Col xs={24}>
@@ -207,7 +204,7 @@ const PersonalLoan = () => {
           
         </Col>
       </Row>
-    </Container>
+  
     {OtpModalComponent}
     </>
   );

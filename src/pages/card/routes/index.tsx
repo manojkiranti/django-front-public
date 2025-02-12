@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes,  useNavigate, useLocation } from 'react-router-dom';
-import { Col, Row, Tabs } from 'antd';
+import { Col, Row, Tabs, Grid } from 'antd';
 import NewDebitCard from './NewDebitCard';
 import NewCreditCard from './NewCreditCard';
 import RepinDebitCard from './RepinDebitCard';
@@ -8,9 +8,11 @@ import DebitCardUnBlock from './DebitCardUnblock';
 import { cardServices } from '@/pages/home/constant';
 import { Container } from '@/components/Elements';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+const {useBreakpoint} = Grid;
 export const CardRoutes = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const screens = useBreakpoint();
 
   const handleTabChange = (key: string) => {
     navigate(key);
@@ -18,14 +20,14 @@ export const CardRoutes = () => {
   const activeKey = cardServices.find(service =>
       location.pathname.endsWith(service.link)
     )?.link || cardServices[0].link;
-
+    const tabPosition = screens.md ? "left" : "top";
   return (
     <Container>
       <Row>
         <Col xs={24} md={24}>
           <Tabs
             activeKey={activeKey}
-            tabPosition="left"
+            tabPosition={tabPosition}
             // style={{ height: "calc(100vh - 520px)" }}
             onChange={handleTabChange}
             items={cardServices.map(service => ({

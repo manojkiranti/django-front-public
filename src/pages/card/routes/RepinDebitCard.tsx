@@ -70,9 +70,6 @@ const RepinDebitCard = () => {
   return (
     <>
     {contextHolder}
-
-    <Container width="sm">
-
      
       <Row>
         <Col xs={24}>
@@ -161,8 +158,6 @@ const RepinDebitCard = () => {
           
         </Col>
       </Row>
-    </Container>
-
     {OtpModalComponent}
     </>
   );

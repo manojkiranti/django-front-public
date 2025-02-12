@@ -22,27 +22,13 @@ export const paymentServices = [
         parentId: 'payments',
         key:'internet',
     },
+    
     {
         icon: faLightbulb,
         title: "Electricity",
         link: "/payment/electricity",
         parentId: 'payments',
         key:'electricity'
-      },
-      {
-        icon: faPlaneDeparture,
-        title: "Flight",
-        offer: "5-6% cashback",
-        link: "/payment/flight",
-        parentId: 'payments',
-        key:'flight'
-      },
-      {
-        icon: faFaucetDrip,
-        title: "Khanipani",
-        link: "/payment/khanipani",
-        parentId: 'payments',
-        key:'khanipani'
       },
       {
         icon: faPhoneRotary,
@@ -53,17 +39,17 @@ export const paymentServices = [
         key:'landline'
       },
       {
-        icon: faUniversity,
-        title: "Government Payment",
-        link: "/payment/government-payment",
+        icon: faFaucetDrip,
+        title: "Khanipani",
+        link: "/payment/khanipani",
         parentId: 'payments',
-        key:'government-payment',
+        key:'khanipani'
       },
       {
         icon: faTvRetro,
         title: "TV",
         offer: "5% cashback",
-        link: "/payment/tv",
+        link: "/payment/television",
         parentId: 'payments',
         key:'tv',
       },
@@ -74,6 +60,23 @@ export const paymentServices = [
         parentId: 'payments',
         key:'insurance'
       },
+    //   {
+    //     icon: faUniversity,
+    //     title: "Government Payment",
+    //     link: "/payment/government-payment",
+    //     parentId: 'payments',
+    //     key:'government-payment',
+    //   },
+     
+     
+    //   {
+    //     icon: faPlaneDeparture,
+    //     title: "Flight",
+    //     offer: "5-6% cashback",
+    //     link: "/payment/flight",
+    //     parentId: 'payments',
+    //     key:'flight'
+    //   },
 ]
 export const cardServices = [
     {
@@ -231,3 +234,5 @@ export const loanServices = [
     //     name: 'creditCardLoan'
     // }
 ]
+
+

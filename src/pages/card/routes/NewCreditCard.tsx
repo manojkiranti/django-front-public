@@ -76,9 +76,6 @@ const NewCreditCard = () => {
   return (
     <>
     {contextHolder}
-
-    <Container width="sm">
-
       
       <Row>
         <Col xs={24}>
@@ -173,8 +170,7 @@ const NewCreditCard = () => {
           
         </Col>
       </Row>
-    </Container>
-
+ 
     {OtpModalComponent}
     </>
   );

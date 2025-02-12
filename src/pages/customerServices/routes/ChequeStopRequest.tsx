@@ -74,9 +74,6 @@ const ChequeStopRequest = () => {
   return (
     <>
     {contextHolder}
-
-    <Container width="sm">
-
     
       <Row>
         <Col xs={24}>
@@ -187,7 +184,7 @@ const ChequeStopRequest = () => {
           
         </Col>
       </Row>
-    </Container>
+    
     {OtpModalComponent}
     </>
   );

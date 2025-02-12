@@ -74,8 +74,6 @@ const BankGuranteeVerification = () => {
     <>
     {contextHolder}
 
-    <Container width="sm">
-
       <Row>
         <Col xs={24}>
          <Card title="Bank Gurantee Verification">
@@ -123,7 +121,7 @@ const BankGuranteeVerification = () => {
           
         </Col>
       </Row>
-    </Container>
+
     {OtpModalComponent}
     </>
   );

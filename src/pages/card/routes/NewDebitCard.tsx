@@ -79,7 +79,7 @@ const NewDebitCard = () => {
     <>
       {contextHolder}
 
-      <Container width="sm">
+   
    
         <Row>
           <Col xs={24}>
@@ -180,7 +180,7 @@ const NewDebitCard = () => {
             </Card>
           </Col>
         </Row>
-      </Container>
+ 
       {OtpModalComponent}
     </>
   );

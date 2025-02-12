@@ -72,9 +72,6 @@ const LockerRequest = () => {
   return (
     <>
     {contextHolder}
-
-    <Container width="sm">
-
       <Row>
         <Col xs={24}>
          <Card title="Locker Request">
@@ -152,7 +149,7 @@ const LockerRequest = () => {
           
         </Col>
       </Row>
-    </Container>
+
     {OtpModalComponent}
     </>
   );

@@ -74,9 +74,8 @@ const BlockAccount = () => {
     <>
     {contextHolder}
 
-    <Container width="sm">
 
-    mobileNumber
+    
       <Row>
         <Col xs={24}>
          <Card title="Block your account(Hack/Scam)">
@@ -162,7 +161,7 @@ const BlockAccount = () => {
           
         </Col>
       </Row>
-    </Container>
+  
 
     {OtpModalComponent}
     </>

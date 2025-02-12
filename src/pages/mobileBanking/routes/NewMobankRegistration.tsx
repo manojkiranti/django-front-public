@@ -68,7 +68,7 @@ const NewMobankRegistration = () => {
     <>
     {contextHolder}
 
-    <Container width="sm">
+    
 
       <Row>
         <Col xs={24}>
@@ -137,7 +137,7 @@ const NewMobankRegistration = () => {
           
         </Col>
       </Row>
-    </Container>
+
     {OtpModalComponent}
     </>
   );

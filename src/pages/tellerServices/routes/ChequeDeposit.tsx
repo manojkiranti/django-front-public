@@ -77,37 +77,9 @@ const ChequeDeposit = () => {
     <>
     {contextHolder}
 
-    <Container width="sm">
 
-      <Row>
-        <Col xs={24} style={{marginBottom:"2rem"}}>
-         
 
-          <Breadcrumb>
-            <Breadcrumb.Item>
-              <Link to="/">
-                <HomeOutlined />
-              </Link>
-             </Breadcrumb.Item>
 
-             <Breadcrumb.Item>
-                <Dropdown menu={{items:tellerMenuItems}}>
-                  <a href="#" onClick={e => e.preventDefault()}>
-                    <Space>
-                        Teller Services
-                       <DownOutlined />
-                    </Space>
-                  </a>
-                </Dropdown>
-             </Breadcrumb.Item>
-
-             <Breadcrumb.Item>
-                Cheque Deposit
-            </Breadcrumb.Item>
-          </Breadcrumb>
-        
-        </Col>
-      </Row>
       <Row>
         <Col xs={24}>
          <Card title="Cheque Deposit">
@@ -198,7 +170,7 @@ const ChequeDeposit = () => {
           
         </Col>
       </Row>
-    </Container>
+  
     {OtpModalComponent}
     </>
   );
